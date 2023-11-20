@@ -1,17 +1,22 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
+import { ArrowIcon } from '@/assets/icons/icons'
+
 import { Button } from './'
 
 const meta = {
   argTypes: {
+    onClick: {
+      action: 'clicked',
+    },
     variant: {
-      control: { type: 'radio' },
+      control: { type: 'inline-radio' },
       options: ['primary', 'secondary', 'tertiary', 'link'],
     },
   },
   component: Button,
   tags: ['autodocs'],
-  title: 'Components/Button',
+  title: 'Components/UI/Button',
 } satisfies Meta<typeof Button>
 
 export default meta
@@ -19,7 +24,19 @@ type Story = StoryObj<typeof meta>
 
 export const Primary: Story = {
   args: {
-    children: 'Primary Button',
+    children: `Button`,
+    disabled: false,
+    variant: 'primary',
+  },
+}
+export const PrimaryWithIcon: Story = {
+  args: {
+    children: (
+      <>
+        <ArrowIcon />
+        <div>Button primary</div>
+      </>
+    ),
     disabled: false,
     variant: 'primary',
   },
@@ -27,31 +44,45 @@ export const Primary: Story = {
 
 export const Secondary: Story = {
   args: {
+    ...Primary.args,
     children: 'Secondary Button',
-    disabled: false,
     variant: 'secondary',
   },
 }
 export const Tertiary: Story = {
   args: {
+    ...Primary.args,
     children: 'Tertiary Button',
-    disabled: false,
     variant: 'tertiary',
   },
 }
 export const Link: Story = {
   args: {
+    as: 'a',
     children: 'Tertiary Button',
     disabled: false,
+    href: 'https://www.google.com',
     variant: 'link',
   },
 }
 
 export const FullWidth: Story = {
   args: {
+    ...Primary.args,
     children: 'Full Width Button',
-    disabled: false,
     fullWidth: true,
     variant: 'primary',
+  },
+}
+export const ButtonPrimary: Story = {
+  args: {
+    ...Primary.args,
+    children: (
+      <>
+        <ArrowIcon />
+        <div>Button secondary</div>
+      </>
+    ),
+    variant: 'secondary',
   },
 }

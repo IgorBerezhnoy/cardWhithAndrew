@@ -6,8 +6,7 @@ import './styles/index.scss'
 import '@fontsource/roboto/400.css'
 import '@fontsource/roboto/700.css'
 
-// eslint-disable-next-line import/extensions
-import { App } from './App.tsx'
+import { App } from './App'
 
 createRoot(document.getElementById('root') as HTMLElement).render(
   <StrictMode>

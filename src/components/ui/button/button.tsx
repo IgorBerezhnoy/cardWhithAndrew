@@ -1,30 +1,20 @@
-import { ComponentPropsWithoutRef } from 'react'
+import { ComponentPropsWithoutRef, ElementType } from 'react'
 
 import s from './button.module.scss'
-import {Story} from '@storybook/react';
 
-export type ButtonProps = {
-  as: any
+export type ButtonProps<T extends ElementType = 'button'> = {
+  as?: T
+  className?: string
   fullWidth?: boolean
   variant?: 'link' | 'primary' | 'secondary' | 'tertiary'
-} & ComponentPropsWithoutRef<'button'>
+} & ComponentPropsWithoutRef<T>
 
-export const Button = ({
-  as: Component = 'button',
-  className,
-  fullWidth,
-  variant = 'primary',
-  ...rest
-}: ButtonProps) => {
+export const Button = <T extends ElementType = 'button'>(
+  props: ButtonProps<T> & Omit<ComponentPropsWithoutRef<T>, keyof ButtonProps<T>>
+) => {
+  const { as: Component = 'button', className, fullWidth, variant = 'primary', ...rest } = props
+
   return (
     <Component className={`${s[variant]} ${fullWidth ? s.fullWidth : ''} ${className}`} {...rest} />
   )
-}
-
-export const AsLink: Story = {
-  args: {
-    as: 'a',
-    children: 'Link that looks like a button',
-    variant: 'primary',
-  },
 }
