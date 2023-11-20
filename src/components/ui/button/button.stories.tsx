@@ -86,3 +86,15 @@ export const ButtonPrimary: Story = {
     variant: 'secondary',
   },
 }
+export const Test: Story = {
+  args: {
+    ...Primary.args,
+    children: (
+      <>
+        <ArrowIcon />
+        <div>Button secondary</div>
+      </>
+    ),
+    variant: 'secondary',
+  },
+}
