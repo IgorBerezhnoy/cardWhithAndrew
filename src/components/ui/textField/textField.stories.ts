@@ -2,6 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { TextField } from '@/components/ui/textField/textField'
 
+import s from './textField.module.scss'
+
 const meta: Meta<typeof TextField> = {
   argTypes: {
     clearText: {
@@ -21,8 +23,9 @@ type Story = StoryObj<typeof TextField>
 
 export const Default: Story = {
   args: {
+    className: s.storyBook,
     disabled: false,
-    error: '',
+    errorMessage: '',
     label: 'Input',
     type: 'default',
     value: 'value',
@@ -30,8 +33,9 @@ export const Default: Story = {
 }
 export const DefaultWithError: Story = {
   args: {
+    className: s.storyBook,
     disabled: false,
-    error: 'Very big error!!!',
+    errorMessage: 'Very big error!!!',
     label: 'Input',
     type: 'default',
     value: 'value',
@@ -39,8 +43,9 @@ export const DefaultWithError: Story = {
 }
 export const Password: Story = {
   args: {
+    className: s.storyBook,
     disabled: false,
-    error: null,
+    errorMessage: null,
     label: 'Input',
     type: 'password',
     value: 'value',
@@ -48,8 +53,9 @@ export const Password: Story = {
 }
 export const Search: Story = {
   args: {
+    className: s.storyBook,
     disabled: false,
-    error: null,
+    errorMessage: null,
     label: 'Input',
     type: 'search',
     value: 'value',
