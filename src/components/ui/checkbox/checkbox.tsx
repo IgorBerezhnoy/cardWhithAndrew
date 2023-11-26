@@ -14,31 +14,32 @@ type CheckboxType = CheckboxProps & {
   disabled?: boolean
   id?: string
   label?: string | undefined
-  onChange: (checked: boolean) => void
+  onValueChange?: (checked: boolean) => void
 }
 
 export const Checkbox = forwardRef<ElementRef<typeof CheckboxRadix.Root>, CheckboxType>(
-  ({ className, disabled = false, id, label, onChange, ...rest }, ref) => {
+  ({ className, disabled = false, id, label, onValueChange, ...rest }, ref) => {
     return (
-      <div className={s.checkbox_label}>
-        <div className={s.wrapper}>
-          <div className={s.around}>
-            <CheckboxRadix.Root
-              className={s.checkboxRoot}
-              disabled={disabled}
-              onCheckedChange={onChange}
-              ref={ref}
-              {...rest}
-              id={id}
-            >
-              <CheckboxRadix.Indicator className={s.checkboxIndicator}>
-                <CheckMarkIcon color={disabled ? '#dad9df' : 'black'} />
-              </CheckboxRadix.Indicator>
-            </CheckboxRadix.Root>
-          </div>
-        </div>
-        <Typography color={'white'}>
-          <label className={`${s.label} ${disabled ? s.labelDisabled : ''}`}>{label}</label>
+      <div className={s.wrapper}>
+        <CheckboxRadix.Root
+          className={s.checkboxRoot}
+          disabled={disabled}
+          onCheckedChange={onValueChange}
+          ref={ref}
+          {...rest}
+          id={id}
+        >
+          <CheckboxRadix.Indicator className={s.checkboxIndicator}>
+            <CheckMarkIcon color={disabled ? '#dad9df' : 'black'} />
+          </CheckboxRadix.Indicator>
+        </CheckboxRadix.Root>
+        <Typography
+          as={'label'}
+          className={`${s.label} ${disabled ? s.labelDisabled : ''}`}
+          color={'white'}
+          htmlFor={id}
+        >
+          {label}
         </Typography>
       </div>
     )
