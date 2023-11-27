@@ -1,3 +1,4 @@
+import { GetDeckByIdArgs, GetDecksArgs, GetDecksResponse } from '@/services/flashcards.types'
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 export const baseApi = createApi({
@@ -10,12 +11,20 @@ export const baseApi = createApi({
   }),
   endpoints: builder => {
     return {
-      getDecks: builder.query<any, void>({
-        query: () => `v1/decks`,
+      getDeckById: builder.query<GetDecksResponse, GetDeckByIdArgs>({
+        query: id => ({
+          url: `v1/decks/${id.id}`,
+        }),
+      }),
+      getDecks: builder.query<GetDecksResponse, GetDecksArgs | void>({
+        query: args => ({
+          params: args ?? {},
+          url: `v1/decks`,
+        }),
       }),
     }
   },
   reducerPath: 'baseApi',
 })
 
-export const { useGetDecksQuery } = baseApi
+export const { useGetDeckByIdQuery, useGetDecksQuery } = baseApi

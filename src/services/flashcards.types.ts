@@ -4,6 +4,17 @@ export interface GetDecksResponse {
   pagination: GetDecksResponsePagination
 }
 
+export type GetDeckByIdArgs = { id: string }
+export type GetDecksArgs = {
+  authorId?: number
+  currentPage?: number
+  itemsPerPage?: number
+  maxCardsCount?: number
+  minCardsCount?: number
+  name?: string
+  orderBy?: string
+}
+
 export interface GetDecksResponsePagination {
   currentPage: number
   itemsPerPage: number
