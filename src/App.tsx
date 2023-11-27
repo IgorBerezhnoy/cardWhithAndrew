@@ -1,9 +1,12 @@
-import { Rating } from '@/components/ui/rating/rating'
+import { Provider } from 'react-redux'
+
+import { Router } from '@/router'
+import { store } from '@/services/store'
 
 export function App() {
   return (
-    <>
-      <Rating onClick={() => console.log('aaaa')} value={3} />
-    </>
+    <Provider store={store}>
+      <Router />
+    </Provider>
   )
 }
