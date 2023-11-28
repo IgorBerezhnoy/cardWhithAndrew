@@ -1,5 +1,6 @@
 import { useState } from 'react'
 
+import { Button } from '@/components/ui/button'
 import {
   Table,
   TableBody,
@@ -8,15 +9,20 @@ import {
   TableHeadCell,
   TableRow,
 } from '@/components/ui/table'
+import { TextField } from '@/components/ui/textField'
 import { Typography } from '@/components/ui/typography'
-import { useGetDeckByIdQuery, useGetDecksQuery } from '@/services/base-api'
+import {
+  useCreateDeckMutation,
+  useGetDeckByIdQuery,
+  useGetDecksQuery,
+} from '@/services/decks.service'
 
 export const Decks = () => {
-  const [currentPage, setCurrentPage] = useState(1)
   const { data, error, isLoading } = useGetDecksQuery()
   const { data: deckById } = useGetDeckByIdQuery({ id: 'clpgfu8fh054cwv2qx449vy3g' })
+  const [createDeck, { isLoading: isDeckBeingCreated }] = useCreateDeckMutation()
+  const [value, setValue] = useState('')
 
-  console.log(deckById)
   if (isLoading) {
     return <Typography as={'h1'}>Loading</Typography>
   }
@@ -26,6 +32,8 @@ export const Decks = () => {
 
   return (
     <div>
+      <TextField onValueChange={e => setValue(e)} value={value} />
+      <Button onClick={() => createDeck({ name: value })}>Create Deck</Button>
       <Table>
         <TableHead>
           <TableRow>

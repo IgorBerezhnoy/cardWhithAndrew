@@ -4,6 +4,11 @@ export interface GetDecksResponse {
   pagination: GetDecksResponsePagination
 }
 
+export type CreateDeckArgs = {
+  cover?: string
+  isPrivate?: boolean
+  name: string
+}
 export type GetDeckByIdArgs = { id: string }
 export type GetDecksArgs = {
   authorId?: number
