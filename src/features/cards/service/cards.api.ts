@@ -1,13 +1,16 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { baseURL } from "../../../common/api/common.api";
+import { GetCards } from "./cards.api.types";
 
 export const cardsApi = createApi({
   reducerPath: "cardsApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:7542/2.0/",
+    baseUrl: baseURL,
+    credentials: "include",
   }),
   endpoints: (build) => {
     return {
-      getCards: build.query<any, string>({
+      getCards: build.query<GetCards, string>({
         query: (packId) => {
           return {
             url: "cards/card",
